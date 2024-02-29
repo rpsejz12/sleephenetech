@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sleephenetech.app.style.model.StyleDAO">
+
+	
+	<insert id="styleInsert">
+		INSERT INTO CFSTYL(
+			STYLE_FONT1, STYLE_SIZE1, STYLE_WEIGHT1, STYLE_FONT2, STYLE_SIZE2, STYLE_WEIGHT2, POST_NO
+		) 
+		VALUES (
+			#{STYLE_FONT1}, #{STYLE_SIZE1}, #{STYLE_WEIGHT1}, #{STYLE_FONT2}, #{STYLE_SIZE2}, #{STYLE_WEIGHT2}, #{POST_NO}
+		)
+	</insert>
+	
+	<update id="styleUpdate">
+		UPDATE CFSTYL
+		   SET STYLE_FONT1 = #{STYLE_FONT1}, STYLE_SIZE1= #{STYLE_SIZE1}
+		 	  , STYLE_WEIGHT1 = #{STYLE_WEIGHT1}, STYLE_FONT2 = #{STYLE_FONT2}
+		 	  , STYLE_SIZE2 = #{STYLE_SIZE2}, STYLE_WEIGHT2 = #{STYLE_WEIGHT2}
+	     WHERE POST_NO = #{POST_NO}
+	</update>
+	
+	<delete id="styleDelete">
+		DELETE FROM CFSTYL
+		 WHERE POST_NO = #{POST_NO}
+	</delete>
+	
+	
+	
+</mapper>

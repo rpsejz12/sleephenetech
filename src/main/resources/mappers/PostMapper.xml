@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sleephenetech.app.post.model.PostDAO">
+
+	<select id="login" resultType="int">
+		SELECT COUNT(*)
+		  FROM CFAUTH
+		 WHERE USER_ID = #{USER_ID}
+		   AND USER_PW = #{USER_PW}
+	</select>
+	
+	
+	<select id="postno" resultType="int">
+		SELECT MAX(POST_NO + 1)
+		FROM CFPOST
+	</select>
+	
+	
+	<select id="posts" resultType="PostVO">
+		SELECT A.POST_NO, A.POST_TITLE, A.POST_TYPE
+	         , A.POST_TXT, A.POST_IMG, A.POST_IMG_TXT
+	         , B.STYLE_FONT1, B.STYLE_SIZE1, B.STYLE_WEIGHT1
+	         , B.STYLE_FONT2, B.STYLE_SIZE2, B.STYLE_WEIGHT2
+		  FROM CFPOST A LEFT JOIN CFSTYL B
+		    ON A.POST_NO  = B.POST_NO
+		 WHERE A.POST_TYPE = #{POST_TYPE}
+		 ORDER BY A.POST_NO ASC
+	</select>
+	
+	<select id="post" resultType="PostVO">
+		SELECT A.POST_NO, A.POST_TITLE, A.POST_TYPE
+	         , A.POST_TXT, A.POST_IMG, A.POST_IMG_TXT
+	         , B.STYLE_FONT1, B.STYLE_SIZE1, B.STYLE_WEIGHT1
+	         , B.STYLE_FONT2, B.STYLE_SIZE2, B.STYLE_WEIGHT2
+		  FROM CFPOST A LEFT JOIN CFSTYL B
+		    ON A.POST_NO  = B.POST_NO
+		 WHERE A.POST_NO = #{POST_NO}
+	</select>
+	
+	
+	
+	
+	<insert id="insert">
+		INSERT INTO CFPOST(
+			POST_NO, POST_TITLE, POST_TYPE, POST_TXT, POST_IMG, POST_IMG_TXT 
+		) 
+		VALUES (
+			#{POST_NO}, #{POST_TITLE}, #{POST_TYPE}, #{POST_TXT}, #{POST_IMG}, #{POST_IMG_TXT}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE CFPOST
+		   SET POST_TITLE = #{POST_TITLE}, POST_TXT= #{POST_TXT}
+		 	  , POST_IMG = #{POST_IMG}, POST_IMG_TXT = #{POST_IMG_TXT}
+	     WHERE POST_NO = #{POST_NO}
+	</update>
+	
+	<delete id="delete">
+		DELETE FROM CFPOST
+		 WHERE POST_NO = #{POST_NO}
+	</delete>
+	
+	
+	
+</mapper>

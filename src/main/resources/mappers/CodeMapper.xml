@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sleephenetech.app.code.model.CodeDAO">
+
+	<select id="menu" resultType="CodeVO">
+		SELECT CODE_NO, CODE_TYPE
+			   , CODE_NAME, CODE_VALUE
+			   , CODE_EXPL, CODE_IDX
+			   , USE_FLAG, CODE_REF
+		  FROM CFCODE
+		 WHERE CODE_TYPE = #{CODE_TYPE}
+		   AND CODE_VALUE = #{CODE_VALUE}
+		 ORDER BY CODE_IDX ASC
+	</select>
+		
+	<select id="codes" resultType="CodeVO">
+		SELECT CODE_NO, CODE_TYPE
+			   , CODE_NAME, CODE_VALUE
+			   , CODE_EXPL, CODE_IDX
+			   , USE_FLAG, CODE_REF
+		  FROM CFCODE
+		 WHERE CODE_TYPE = #{CODE_TYPE}
+		 ORDER BY CODE_IDX ASC
+	</select>
+
+</mapper>
